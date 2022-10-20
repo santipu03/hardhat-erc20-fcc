@@ -5,24 +5,27 @@ const {
 } = require("../helper-hardhat-config")
 const { verify } = require("../helper-functions")
 
-module.exports = async ({ getNamedAccounts, deployments }) => {
+module.exports = async function ({ getNamedAccounts, deployments }) {
   const { deploy, log } = deployments
   const { deployer } = await getNamedAccounts()
+
+  const args = [INITIAL_SUPPLY]
+
   const ourToken = await deploy("OurToken", {
     from: deployer,
-    args: [INITIAL_SUPPLY],
+    args: args,
     log: true,
-    // we need to wait if on a live network so we can verify properly
     waitConfirmations: network.config.blockConfirmations || 1,
   })
-  log(`ourToken deployed at ${ourToken.address}`)
+
+  log(`outToken deployed at ${ourToken.address}`)
 
   if (
     !developmentChains.includes(network.name) &&
     process.env.ETHERSCAN_API_KEY
   ) {
-    await verify(ourToken.address, [INITIAL_SUPPLY])
+    log("Verifying...")
+    await verify(ourToken.address, args)
   }
+  log("-----------------------------------")
 }
-
-module.exports.tags = ["all", "token"]
