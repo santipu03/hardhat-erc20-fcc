@@ -6,11 +6,11 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 /**
  * @title Custom Token
- * @dev santipu
+ * @author santipu
  */
 
-contract OurToken is ERC20 {
-  constructor(uint256 initialSupply) ERC20("OurToken", "OT") {
+contract SantipuToken is ERC20 {
+  constructor(uint256 initialSupply) ERC20("SantipuToken", "SPT") {
     _mint(msg.sender, initialSupply);
   }
 }

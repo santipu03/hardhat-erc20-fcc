@@ -11,14 +11,14 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 
   const args = [INITIAL_SUPPLY]
 
-  const ourToken = await deploy("OurToken", {
+  const ourToken = await deploy("SantipuToken", {
     from: deployer,
     args: args,
     log: true,
     waitConfirmations: network.config.blockConfirmations || 1,
   })
 
-  log(`outToken deployed at ${ourToken.address}`)
+  log(`santipuToken deployed at ${ourToken.address}`)
 
   if (
     !developmentChains.includes(network.name) &&
