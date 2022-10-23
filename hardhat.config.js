@@ -44,7 +44,7 @@ module.exports = {
   },
   contractSizer: {
     runOnCompile: false,
-    only: ["OurToken"],
+    only: ["SantipuToken"],
   },
   namedAccounts: {
     deployer: {

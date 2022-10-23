@@ -11,21 +11,23 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 
   const args = [INITIAL_SUPPLY]
 
-  const ourToken = await deploy("SantipuToken", {
+  const santipuToken = await deploy("SantipuToken", {
     from: deployer,
     args: args,
     log: true,
     waitConfirmations: network.config.blockConfirmations || 1,
   })
 
-  log(`santipuToken deployed at ${ourToken.address}`)
+  log(`santipuToken deployed at ${santipuToken.address}`)
 
   if (
     !developmentChains.includes(network.name) &&
     process.env.ETHERSCAN_API_KEY
   ) {
     log("Verifying...")
-    await verify(ourToken.address, args)
+    await verify(santipuToken.address, args)
   }
   log("-----------------------------------")
 }
+
+module.exports.tags = ["all", "token"]
